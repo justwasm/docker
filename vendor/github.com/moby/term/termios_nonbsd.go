@@ -1,5 +1,5 @@
-//go:build !darwin && !freebsd && !netbsd && !openbsd && !windows
-// +build !darwin,!freebsd,!netbsd,!openbsd,!windows
+//go:build !darwin && !freebsd && !netbsd && !openbsd && !windows && !js
+// +build !darwin,!freebsd,!netbsd,!openbsd,!windows,!js
 
 package term
 

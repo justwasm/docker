@@ -1,3 +1,5 @@
+//go:build !js
+
 // Package sockets provides helper functions to create and configure Unix or TCP sockets.
 package sockets
 
