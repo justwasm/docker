@@ -22,7 +22,7 @@ require (
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
 	github.com/google/uuid v1.6.0
 	github.com/mattn/go-runewidth v0.0.24
-	github.com/moby/go-archive v0.2.0
+	github.com/moby/go-archive v0.0.0-00010101000000-000000000000
 	github.com/moby/moby/api v1.55.0-rc.1
 	github.com/moby/moby/client v0.5.0-rc.1
 	github.com/moby/patternmatcher v0.6.1
@@ -30,7 +30,7 @@ require (
 	github.com/moby/sys/atomicwriter v0.1.0
 	github.com/moby/sys/capability v0.4.0
 	github.com/moby/sys/sequential v0.7.0
-	github.com/moby/sys/signal v0.7.1
+	github.com/moby/sys/signal v0.0.0-00010101000000-000000000000
 	github.com/moby/sys/symlink v0.3.0
 	github.com/moby/term v0.5.2
 	github.com/morikuni/aec v1.1.0
@@ -78,7 +78,7 @@ require (
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.29.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	github.com/klauspost/compress v1.18.2 // indirect
+	github.com/klauspost/compress v1.18.3 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/sys/user v0.4.0 // indirect
 	github.com/moby/sys/userns v0.1.0 // indirect
@@ -96,16 +96,17 @@ require (
 	go.opentelemetry.io/proto/otlp v1.10.0 // indirect
 	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
-	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4 // indirect
 	google.golang.org/grpc v1.81.1 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
 
-// Use our WASM-patched fork of moby/term.
+// WASM-patched forks of upstream deps.
 replace github.com/moby/term => github.com/justwasm/mobyterm v0.5.2-wasm
 
-// Exclude genproto sub-modules that conflict with the monolithic
-// google.golang.org/genproto required by moby/swarmkit.
-exclude google.golang.org/genproto/googleapis/api v0.0.0-20260526163538-3dc84a4a5aaa
+replace github.com/moby/sys/signal => github.com/justwasm/moby-sys/signal v0.0.0-20260617100450-b67d51a43bd7
 
-exclude google.golang.org/genproto/googleapis/rpc v0.0.0-20260526163538-3dc84a4a5aaa
+replace github.com/moby/sys/user => github.com/justwasm/moby-sys/user v0.0.0-20260617100450-b67d51a43bd7
+
+replace github.com/moby/go-archive => github.com/justwasm/moby-go-archive v0.0.0-20260617100643-37e15bf50107
+
+replace github.com/docker/go-connections => github.com/justwasm/docker-go-connections v0.0.0-20260617100626-f0ee7e678322
