@@ -1,6 +1,15 @@
 module github.com/docker/cli
 
+// 'vendor.mod' enables use of 'go mod vendor' to managed 'vendor/' directory.
+// There is no 'go.mod' file, as that would imply opting in for all the rules
+// around SemVer, which this repo cannot abide by as it uses CalVer.
+
 go 1.25.0
+
+tool (
+	github.com/cpuguy83/go-md2man/v2 // for scripts/docs/generate-man.sh
+	golang.org/x/mod/modfile // for module compatibility check
+)
 
 require (
 	dario.cat/mergo v1.0.2
@@ -22,7 +31,7 @@ require (
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510
 	github.com/google/uuid v1.6.0
 	github.com/mattn/go-runewidth v0.0.24
-	github.com/moby/go-archive v0.0.0-00010101000000-000000000000
+	github.com/moby/go-archive v0.2.0
 	github.com/moby/moby/api v1.55.0-rc.1
 	github.com/moby/moby/client v0.5.0-rc.1
 	github.com/moby/patternmatcher v0.6.1
@@ -30,7 +39,7 @@ require (
 	github.com/moby/sys/atomicwriter v0.1.0
 	github.com/moby/sys/capability v0.4.0
 	github.com/moby/sys/sequential v0.7.0
-	github.com/moby/sys/signal v0.0.0-00010101000000-000000000000
+	github.com/moby/sys/signal v0.7.1
 	github.com/moby/sys/symlink v0.3.0
 	github.com/moby/term v0.5.2
 	github.com/morikuni/aec v1.1.0
@@ -68,7 +77,7 @@ require (
 	github.com/clipperhouse/uax29/v2 v2.2.0 // indirect
 	github.com/containerd/errdefs/pkg v0.3.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
-	github.com/docker/go-events v0.0.0-20190806004212-e31b211e4f1c // indirect
+	github.com/docker/go-events v0.0.0-20260608200158-dbf6103125a4 // indirect
 	github.com/docker/go-metrics v0.0.1 // indirect
 	github.com/docker/libtrust v0.0.0-20160708172513-aabc10ec26b7 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
@@ -78,42 +87,27 @@ require (
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.29.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	github.com/klauspost/compress v1.18.3 // indirect
+	github.com/klauspost/compress v1.18.6 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/sys/user v0.4.0 // indirect
 	github.com/moby/sys/userns v0.1.0 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/prometheus/client_golang v1.20.5 // indirect
+	github.com/prometheus/client_golang v1.22.0 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
+	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	go.etcd.io/raft/v3 v3.6.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.44.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.10.0 // indirect
-	golang.org/x/net v0.55.0 // indirect
-	golang.org/x/time v0.11.0 // indirect
-	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4 // indirect
+	golang.org/x/mod v0.37.0 // indirect
+	golang.org/x/net v0.56.0 // indirect
+	golang.org/x/time v0.15.0 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20260526163538-3dc84a4a5aaa // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260526163538-3dc84a4a5aaa // indirect
 	google.golang.org/grpc v1.81.1 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
-
-// WASM-patched forks of upstream deps.
-replace github.com/moby/term => github.com/justwasm/mobyterm v0.5.2-wasm
-
-replace github.com/moby/sys/signal => github.com/justwasm/moby-sys/signal v0.0.0-20260617100450-b67d51a43bd7
-
-replace github.com/moby/sys/user => github.com/justwasm/moby-sys/user v0.0.0-20260617100450-b67d51a43bd7
-
-replace github.com/moby/go-archive => github.com/justwasm/moby-go-archive v0.0.0-20260617100643-37e15bf50107
-
-replace github.com/docker/go-connections => github.com/justwasm/docker-go-connections v0.0.0-20260617100626-f0ee7e678322
-
-// Redirect genproto sub-modules to monolithic module to resolve
-// ambiguous import between moby/swarmkit and OTel exporters.
-replace google.golang.org/genproto/googleapis/api => google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4
-
-replace google.golang.org/genproto/googleapis/rpc => google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4
