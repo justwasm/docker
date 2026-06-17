@@ -96,6 +96,7 @@ require (
 	go.opentelemetry.io/proto/otlp v1.10.0 // indirect
 	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
+	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4 // indirect
 	google.golang.org/grpc v1.81.1 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
@@ -110,3 +111,9 @@ replace github.com/moby/sys/user => github.com/justwasm/moby-sys/user v0.0.0-202
 replace github.com/moby/go-archive => github.com/justwasm/moby-go-archive v0.0.0-20260617100643-37e15bf50107
 
 replace github.com/docker/go-connections => github.com/justwasm/docker-go-connections v0.0.0-20260617100626-f0ee7e678322
+
+// Redirect genproto sub-modules to monolithic module to resolve
+// ambiguous import between moby/swarmkit and OTel exporters.
+replace google.golang.org/genproto/googleapis/api => google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4
+
+replace google.golang.org/genproto/googleapis/rpc => google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4
